@@ -11,7 +11,8 @@ import (
 	"strings"
 )
 
-// grabImg should eventually handle directory options for saving
+// author == the save to directory
+// the path is added to the app directory
 func grabImg(url, author string) error {
 	res, err := http.Get(url)
 	if err != nil {
