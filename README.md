@@ -1,5 +1,6 @@
 # gopapers
 Download wallpapers from Reddit using Go.
+D
 
 ## usage
 ### import the Reddit api wrapper
@@ -16,6 +17,7 @@ Gopaper uses the [Geddit](https://github.com/jzelinskie/geddit) Go wrapper for t
  `./wallpapers`
 
  ### optional flag
+
  **set the subreddit**
 
  `./wallpapers -sub=earthporn`
@@ -23,5 +25,6 @@ Gopaper uses the [Geddit](https://github.com/jzelinskie/geddit) Go wrapper for t
 
  ## future features?
  * save to a directory to keep the app directory clean [ ]
- * handle different sorting options [ ]
  * implement go routines [ ]
+ * set the limit via a flag [ ]
+ * handle different sorting options [ ]
