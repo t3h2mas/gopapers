@@ -24,7 +24,7 @@ Gopaper uses the [Geddit](https://github.com/jzelinskie/geddit) Go wrapper for t
  `./wallpapers -sub=earthporn`
 
 
- ## future features?
+## future features?
  * save to a directory to keep the app directory clean [ ]
  * implement go routines [ ]
  * set the limit via a flag [ ]
