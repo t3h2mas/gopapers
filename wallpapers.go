@@ -1,0 +1,82 @@
+package main
+
+import (
+	"flag"
+	"fmt"
+	"github.com/jzelinskie/geddit"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+// grabImg should eventually handle directory options for saving
+func grabImg(url, author string) error {
+	res, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return err
+	}
+
+	res.Body.Close()
+
+	// filename / path setup
+	parts := strings.Split(url, "/")
+	filename := parts[len(parts)-1]
+
+	err = os.MkdirAll(author, 0777)
+	if err != nil {
+		return err
+	}
+
+	wd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	fullpath := filepath.Join(wd, author, filename)
+
+	fmt.Println("[!] PATH: ", fullpath)
+
+	err = ioutil.WriteFile(fullpath, data, 0666)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func main() {
+	// this returns a str pointer
+	subreddit := flag.String("sub", "wallpaper", "subreddit name (String)")
+	flag.Parse()
+
+	fmt.Println("Subreddit: ", *subreddit)
+
+	session := geddit.NewSession("wallpapers.go v1")
+	opts := geddit.ListingOptions{
+		Limit: 25,
+	}
+
+	// TODO: add a flag for sorting options
+	submissions, err := session.SubredditSubmissions(*subreddit, geddit.HotSubmissions, opts)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	for _, s := range submissions {
+		// TODO: test s.URL for nil
+		if strings.HasSuffix(s.URL, ".jpg") || strings.HasSuffix(s.URL, ".png") {
+			fmt.Printf("Title: %s\nAuthor: %s\nUrl: %s\n\n", s.Title, s.Author, s.URL)
+			err := grabImg(s.URL, s.Author)
+			if err != nil {
+				fmt.Println("ERROR: ", err)
+			}
+		}
+	}
+}
