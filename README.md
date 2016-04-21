@@ -21,11 +21,15 @@ Gopaper uses the [Geddit](https://github.com/jzelinskie/geddit) Go wrapper for t
 
 **set the subreddit**
 
- `./wallpapers -sub=earthporn`
+ `./wallpapers -s=earthporn`
 
+ s: subreddit
+
+ `./wallpapers -a=100`
+
+a: amount
 
  ## future features?
  * save to a directory to keep the app directory clean [ ]
  * implement go routines [ ]
- * set the limit via a flag [ ]
  * handle different sorting options [ ]
