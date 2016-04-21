@@ -53,14 +53,15 @@ func grabImg(url, author string) error {
 
 func main() {
 	// this returns a str pointer
-	subreddit := flag.String("sub", "wallpaper", "subreddit name (String)")
+	subreddit := flag.String("s", "wallpaper", "subreddit name")
+	limit := flag.Int("a", 25, "amount of posts to download")
 	flag.Parse()
 
 	fmt.Println("Subreddit: ", *subreddit)
 
 	session := geddit.NewSession("wallpapers.go v1")
 	opts := geddit.ListingOptions{
-		Limit: 25,
+		Limit: *limit,
 	}
 
 	// TODO: add a flag for sorting options
