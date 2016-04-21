@@ -30,7 +30,10 @@ func grabImg(url, author string) error {
 	parts := strings.Split(url, "/")
 	filename := parts[len(parts)-1]
 
-	err = os.MkdirAll(author, 0777)
+	// root save dir i.e. "i/author/img.jpg"
+	var saveRoot string = "i/"
+
+	err = os.MkdirAll(saveRoot+author, 0777)
 	if err != nil {
 		return err
 	}
@@ -40,7 +43,7 @@ func grabImg(url, author string) error {
 		return err
 	}
 
-	fullpath := filepath.Join(wd, author, filename)
+	fullpath := filepath.Join(wd, saveRoot, author, filename)
 
 	fmt.Println("[!] PATH: ", fullpath)
 
