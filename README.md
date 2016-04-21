@@ -29,7 +29,7 @@ Gopaper uses the [Geddit](https://github.com/jzelinskie/geddit) Go wrapper for t
 
 a: amount
 
- ## future features?
+## future features?
  * save to a directory to keep the app directory clean [ ]
  * implement go routines [ ]
  * handle different sorting options [ ]
